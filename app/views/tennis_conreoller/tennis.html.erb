@@ -1,0 +1,157 @@
+<%= javascript_pack_tag 'tennis' %>
+
+<div style="overflow:hidden">
+<!-- Fixed hedder -->
+<div class="navbar fixed-top">
+  <div id="header" class="container">
+    <div>
+      <a class="navbar-brand" href="#hello">
+      	<i class="fa fa-bolt"></i>
+      </a>
+    </div>
+    
+    <div>
+      <ul class="nav" style="overflow: hidden;">
+        <li style="float: left;"><a href="#hello" class="smoothscroll pr-4">Home</a></li>
+        <li style="float: left;"><a href="#green" class="smoothscroll pr-4">About</a></li>
+        <li style="float: left;"><a href="#contact" class="smoothscroll">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+	<div id="hello">
+	  <div class="container">
+	    <div class="d-flex justify-content-center">
+	      <div class="col-lg-8 col-lg-offset-2 centered">
+	        <h1 class="pb-3">MUSAKO Tennis</h1>
+	        <h2>Musashikosugi Tennis さ～くる</h2>
+	      </div>
+	      <!-- /col-lg-8 -->
+	    </div>
+	    <!-- /row -->
+	  </div>
+	  <!-- /container -->
+	</div>
+	<!-- /hello -->
+</div>
+
+	<div id="green">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-lg-5 centered">
+	    	<img src="/assets/iphone.png" alt="">
+	      </div>
+	
+	      <div class="col-lg-7 centered">
+	        <h3>ABOUT</h3>
+	        <p>2021年8月から新しく設立したサークルで、これから盛り上げていきたいと思っています！</p>
+	        <p>主な活動場所は、等々力テニスコート、川崎マリエンテニスコート、多摩スポーツセンター、富士見公園テニスコートを予定しています！</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div id="latest">
+		<div class="container">
+		  <h2 class="d-flex justify-content-center pt-5">OUR LATEST WORK</h2>
+		  <div class="row centered mt grid">
+		    <div class="col-lg-4">
+		    	<img src="/assets/01.jpg" alt="">
+		    </div>
+		    <div class="col-lg-4">
+		    	<img src="/assets/02.jpg" alt="">
+		    </div>
+		    <div class="col-lg-4">
+		    	<img src="/assets/03.jpg" alt="">
+		    </div>
+		  </div>
+		
+		  <div class="row centered mt grid">
+		    <div class="col-lg-4">
+		    	<img src="/assets/04.jpg" alt="">
+		    </div>
+		    <div class="col-lg-4">
+		    	<img src="/assets/05.jpg" alt="">
+		    </div>
+		    <div class="col-lg-4">
+		    	<img src="/assets/06.jpg" alt="">
+		    </div>
+		  </div>
+	  </div>
+	
+	</div>
+	
+	<section id="contact">
+	
+	  <div class="row mt centered d-flex justify-content-center"">
+	    <div class="col-lg-7 col-lg-offset-1 mt">
+	      <p class="lead">ご参加希望のご連絡や、質問などありましたらご気軽にご連絡ください！</p>
+	    </div>
+	    <div class="col-lg-3 mt">
+	      <p><button type="button" class="btn btn-theme btn-lg">Email Me!</button></p>
+	    </div>
+	  </div>
+	  
+	  <div id="social">
+	    <div class="container">
+	      <div class="d-flex justify-content-center">
+	        <div class="col-lg-8 d-inline-flex justify-content-between" >
+	          <div>
+	            <a href="#"><i class="fab fa-facebook"></i></a>
+	          </div>
+	          <div>
+	            <a href="#"><i class="fab fa-dribbble"></i></a>
+	          </div>
+	          <div>
+	            <a href="#"><i class="fab fa-twitter"></i></a>
+	          </div>
+	          <div>
+	            <a href="#"><i class="fa fa-envelope"></i></a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <!-- /container -->
+	  </div>
+	  
+	  <!-- /social -->
+	  <div class="container ">
+	    <div class="d-flex justify-content-center">
+	      <div class="col-md-8 col-md-offset-2">
+	        <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
+	
+	          <div class="form-group">
+	            <input type="name" name="name" class="form-control" id="contact-name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+	            <div class="validate"></div>
+	          </div>
+	          <div class="form-group">
+	            <input type="email" name="email" class="form-control" id="contact-email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+	            <div class="validate"></div>
+	          </div>
+	          <div class="form-group">
+	            <input type="text" name="subject" class="form-control" id="contact-subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+	            <div class="validate"></div>
+	          </div>
+	
+	          <div class="form-group">
+	            <textarea class="form-control" name="message" id="contact-message" placeholder="Your Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+	            <div class="validate"></div>
+	          </div>
+	
+	          <div class="loading"></div>
+	          <div class="error-message"></div>
+	          <div class="sent-message">Your message has been sent. Thank you!</div>
+	
+	          <div class="form-send">
+	            <button type="submit" class="btn btn-large">Send Message</button>
+	          </div>
+	
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	
+	</section>
+</div>
+      
