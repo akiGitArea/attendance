@@ -1,0 +1,7 @@
+<h1>Home#top</h1>
+
+<% if logged_in? %>
+  <%= render 'tennis_conreoller/tennis' %>
+<% else %>
+  <%= render 'tennis_conreoller/not_logged_in' %>
+<% end %>
