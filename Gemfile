@@ -63,4 +63,3 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
 gem "bcrypt"
-gem 'wdm', '~> 0.1.0'

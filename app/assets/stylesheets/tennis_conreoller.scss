@@ -141,7 +141,6 @@ hr {
 }
 
 #hello h1 {
-//  font-size: 65px;
   font-weight: 700;
   letter-spacing: 3px;
   color: #74cfae;
@@ -150,6 +149,12 @@ hr {
 #hello h2 {
   color: #c0c0c0;
   font-weight: 400;
+}
+
+#hello label {
+  color: #c0c0c0;
+  font-weight: 400;
+  font-size: 35px;
 }
 
 /* Green */
@@ -365,49 +370,3 @@ hr {
   font-family: 'Hachi Maru Pop', cursive;
   text-align: center;
 }
-
-//.modal-body {
-//    background: #74cfae;
-//	border-radius: 10% 30% 50% 70%;
-//}
-	
-
-//レスポンシブフォントサイズ
-@media screen and (max-width: 575px) {
- 	#hello h1{ font-size: 35px; } 
-	#hello h2{ font-size: 15px; } 
-	#testModal div{ font-size: 25px; }
- }
-
-@media screen and (min-width: 576px) and (max-width: 768px) {
- 	#hello h1{ font-size: 55px; } 
- 	#hello h2{ font-size: 25px; } 
-	#header a{ font-size: 1rem; }
-	#social a{ font-size: 1rem; }
-	#testModal div{ font-size: 30px; }
- }
-
-@media screen and (min-width: 769px) and (max-width: 992px) { 
-	#hello h1{ font-size: 55px; }  
- 	#hello h2{ font-size: 25px; } 
-	#header a{ font-size: 2rem; }
-	#social a{ font-size: 2rem; }
-	#testModal div{ font-size: 35px; }
-}
-
-@media screen and (min-width: 993px) and (max-width: 1200px) {
- 	#hello h1{ font-size: 70px; } 
- 	#hello h2{ font-size: 30px; } 
-	#header a{ font-size: 2rem; }
-	#social a{ font-size: 2rem; }
-	#testModal div{ font-size: 35px; }
- }
-
-@media screen and (min-width: 1201px) { 
-	#hello h1{ font-size: 85px; } 
- 	#hello h2{ font-size: 35px; } 
-	#header a{ font-size: 2rem; }
-	#social a{ font-size: 2rem; }
-	#testModal div{ font-size: 35px; }
-//	.modal-dialog{max-width: inherit;width: 98%;margin-left: 15px; }
- }

@@ -5,8 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-# coding: utf-8
-
-Tenni.create(:name => 'akiadayo', :flg => '1')
-Tenni.create(:name => 'zenidayo', :flg => '2')
+User.create!(
+  name: 'aaa',
+  email: 'aaa@aaa.com',
+  password: 'aaa',
+  password_confirmation: 'aaa'
+  )
+  
+User.create!(
+  name: 'bbb',
+  email: 'bbb@bbb.com',
+  password: 'bbb',
+  password_confirmation: 'bbb'
+  )
