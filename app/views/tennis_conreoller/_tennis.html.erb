@@ -1,20 +1,18 @@
 <%= javascript_pack_tag 'tennis' %>
 
 <div style="overflow:hidden;">
-	<!-- Fixed hedder -->
 	<div class="navbar fixed-top">
 	  <div id="header" class="container">
 	    <div>
 	      <a class="navbar-brand" href="#hello">
 	      	<i class="fa fa-bolt"></i>
 	      </a>
-	    </div>
+		 </div>
 	    <div>
-	      <%= link_to "Logout", logout_path, method: :delete %>
+			<%= link_to "Logout", logout_path, method: :delete %>
 	    </div>
 	  </div>
 	</div>
-	
 	<div class="d-flex justify-content-center">
 		<div id="hello">
 		  <div class="container">
@@ -23,166 +21,96 @@
 		        <h1 class="pb-3">MUSAKO Tennis</h1>
 		        <h2>Musashikosugi Tennis さ～くる</h2>
 		    	<div class="d-flex justify-content-center">
-	    			<!--
-				    <div class="col-lg-3 mt">
-				      <p><button type="button" class="btn btn-theme btn-lg">Schedule</button></p>
-				    </div>
-				    -->
 				    <div class="col-lg-3 mt">
 				      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#testModal" data-backdrop="true">Schedule</button></p>
 				    </div>
+		    			<% if @admin_flg then %>
+					    	<div class="d-flex justify-content-center">
+							    <div class="col-lg-3 mt">
+							      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#adminScheduleModal" data-backdrop="true">Manage Schedule</button></p>
+							    </div>
+				      	</div>
+							<% end %>
 		      	</div>
 		      </div>
-		      <!-- /col-lg-8 -->
 		    </div>
-		    <!-- /row -->
 		  </div>
-		  <!-- /container -->
 		</div>
-		<!-- /hello -->
 	</div>
-
-
-<!-- 開発中
-	<div id="green">
-	  <div class="container">
-	    <div class="row">
-	      <div class="col-lg-5 centered">
-	    	<img src="/assets/iphone.png" alt="">
-	      </div>
-	      <div class="col-lg-7 centered">
-	        <h3>ABOUT</h3>
-	        <p>2021年8月から新しく設立したサークルで、これから盛り上げていきたいと思っています！</p>
-	        <p>主な活動場所は、等々力テニスコート、川崎マリエンテニスコート、多摩スポーツセンター、富士見公園テニスコートを予定しています！</p>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div id="latest">
-		<div class="container">
-		  <h2 class="d-flex justify-content-center pt-5">OUR LATEST WORK</h2>
-		  <div class="row centered mt grid">
-		    <div class="col-lg-4">
-		    	<img src="/assets/01.jpg" alt="">
-		    </div>
-		    <div class="col-lg-4">
-		    	<img src="/assets/02.jpg" alt="">
-		    </div>
-		    <div class="col-lg-4">
-		    	<img src="/assets/03.jpg" alt="">
-		    </div>
-		  </div>
-		  <div class="row centered mt grid">
-		    <div class="col-lg-4">
-		    	<img src="/assets/04.jpg" alt="">
-		    </div>
-		    <div class="col-lg-4">
-		    	<img src="/assets/05.jpg" alt="">
-		    </div>
-		    <div class="col-lg-4">
-		    	<img src="/assets/06.jpg" alt="">
-		    </div>
-		  </div>
-	  </div>
-	</div>
-	
-	<section id="contact">
-	  <div class="row mt centered d-flex justify-content-center"">
-	    <div class="col-lg-7 col-lg-offset-1 mt">
-	      <p class="lead">ご参加希望のご連絡や、質問などありましたらご気軽にご連絡ください！</p>
-	    </div>
-	    <div class="col-lg-3 mt">
-	      <p><button type="button" class="btn btn-theme btn-lg">Email Me!</button></p>
-	    </div>
-	  </div>
-	  <div id="social">
-	    <div class="container">
-	      <div class="d-flex justify-content-center">
-	        <div class="col-lg-8 d-inline-flex justify-content-between" >
-	          <div>
-	            <a href="#"><i class="fab fa-facebook"></i></a>
-	          </div>
-	          <div>
-	            <a href="#"><i class="fab fa-dribbble"></i></a>
-	          </div>
-	          <div>
-	            <a href="#"><i class="fab fa-twitter"></i></a>
-	          </div>
-	          <div>
-	            <a href="#"><i class="fa fa-envelope"></i></a>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	  
-	  <div class="container ">
-	    <div class="d-flex justify-content-center">
-	      <div class="col-md-8 col-md-offset-2">
-	        <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
-	          <div class="form-group">
-	            <input type="name" name="name" class="form-control" id="contact-name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-	            <div class="validate"></div>
-	          </div>
-	          <div class="form-group">
-	            <input type="email" name="email" class="form-control" id="contact-email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-	            <div class="validate"></div>
-	          </div>
-	          <div class="form-group">
-	            <input type="text" name="subject" class="form-control" id="contact-subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
-	            <div class="validate"></div>
-	          </div>
-	          <div class="form-group">
-	            <textarea class="form-control" name="message" id="contact-message" placeholder="Your Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
-	            <div class="validate"></div>
-	          </div>
-	          <div class="loading"></div>
-	          <div class="error-message"></div>
-	          <div class="sent-message">Your message has been sent. Thank you!</div>
-	          <div class="form-send">
-	            <button type="submit" class="btn btn-large">Send Message</button>
-	          </div>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	
-	</section>
-
-開発中 -->
-
 </div>
-
-
 
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-        	<!--
-            <div class="modal-header">
-                <h4><div class="modal-title" id="myModalLabel">活動予定</div></h4>
-            </div>
-            -->
             <div class="modal-body whiteBack">
-            	<h2><div class="modal-title" id="myModalLabel">活動予定</div></h2>
-            	<br>
-            	<div>2021/09/18<br>多摩スポーツセンター<br>18：30～20：30</div>
-            	<br>
-            	<div>2021/09/19<br>富士見公園テニスコート<br>16：00～18：00</div>
-            	<br>
-            	<div>2021/09/26<br>スマッシュヒッツ<br>12：00～14：00</div>
-            </div>
-        	<!--
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                <button type="button" class="btn btn-danger">削除</button>
-            </div>
-            -->
+		        	<table class="table table-hover">
+						  <thead>
+						    <tr>
+						      <th scope="col">活動日時</th>
+						      <th scope="col">場所</th>
+						      <th scope="col">参加費</th>
+						      <th scope="col">集合場所</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+				    		<% @schedules.each do |schedules| %>
+							    <tr>
+							      <td scope="row"><%= schedules.start_at.strftime('%-m月%d日%-H時%M分') %>～<%= schedules.end_at.strftime('%-H時%M分') %></td>
+							      <td><%= schedules.place %></td>
+							      <td><%= schedules.price_per %>円</td>
+							      <td><%= schedules.court_num %></td>
+							    </tr>
+							<% end %>
+						  </tbody>
+						</table>
+          </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="adminScheduleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body whiteBack">
+	            <div class="d-flex justify-content-center">
+		            <!-- <div>
+		            	<ul style="list-style: none;">
+		            		<li><span style="width:100px; display:inline-block;">日時(from)</span><input type="datetime" id="start_at"></li>
+		            		<li><span style="width:100px; display:inline-block;">日時(to)</span><input type="datetime" id="end_at"></li>
+		            		<li><span style="width:100px; display:inline-block;">場所</span><input type="text" id="place"></li>
+		            		<li><span style="width:100px; display:inline-block;">コート料金</span><input type="number" id="price_all"></li>
+		            		<li><span style="width:100px; display:inline-block;">参加費</span><input type="number" id="price_per"></li>
+		            		<li><span style="width:100px; display:inline-block;">集合場所</span><input type="text" id="court_num"></li>
+		            		<li><span style="width:100px; display:inline-block;">説明</span><input type="text" id="explanation"></li>
+		            	</ul>
+		            </div>
+		            <div>
+									<button type="button" class="btn btn-theme btn-lg mb-8">Submit</button>
+		            </div> -->
 
+								<%= @schedules = Schedule.new %>
+								<%= form_for(@schedules, url: create_path) do |f| %>
+								  <%= f.label :start_at,"日時(from)" %>
+								  	<%= f.datetime_select  :start_at %>
+								  <%= f.label :end_at,"日時(to)" %>
+								  	<%= f.datetime_select  :end_at %>
+								  <%= f.label :place,"場所" %>
+								  	<%= f.text_field :place %>
+								  <%= f.label :price_all, "コート料金" %>
+								  	<%= f.number_field  :price_all %>
+								  <%= f.label :price_per, "参加費" %>
+								  	<%= f.number_field  :price_per %>
+								  <%= f.label :court_num, "集合場所" %>
+								  	<%= f.text_field :court_num %>
+								  <%= f.label :explanation, "説明" %>
+								  	<%= f.text_field :explanation %>
+								  <%= f.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+								<% end %>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -192,4 +120,3 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
-      

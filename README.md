@@ -110,3 +110,10 @@ heroku logs -t
 ```
 rake db:seed
 ```
+
+* rail コンソール
+```
+rails c
+```
+テーブル確認 【テーブル名】.column_names
+```

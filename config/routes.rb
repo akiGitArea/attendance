@@ -4,16 +4,15 @@ Rails.application.routes.draw do
   get 'users/show'
   get 'home/top'
   get 'home/index'
+  # get 'tennis_conreoller/create'
   root 'home#top'
-  resource :user, only: [:new, :create, :show]
+#  resource :user, only: [:new, :create, :show]
+  resource :user, only: [:new, :show]
   get 'login', to: "sessions#new"
   post 'login', to: "sessions#create"
   delete 'logout', to: "sessions#destroy"
-  
-  #get 'tennis_conreoller/tennis'
-  #root  'tennis_conreoller#tennis'
-  
-  #resources :tennis_conreoller
-  #root 'tennis_conreoller/tennis'
+
+  post 'create', to: "tennis_conreoller#create"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
