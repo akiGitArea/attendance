@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   delete 'logout', to: "sessions#destroy"
 
   post 'create', to: "tennis_conreoller#create"
+  post 'change', to: "tennis_conreoller#change"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
