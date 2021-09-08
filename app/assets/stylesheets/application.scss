@@ -33,6 +33,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 	label{ font-size: 15px; }
  	#adminScheduleModal label{ font-size: 10px; }
 	input[type="submit"] { font-size: 15px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 10px !important; width:40px !important;  }
+  .modal-body th, .modal-body td{ font-size: 10px; }
 //	#testModal div{ font-size: 25px; }
  }
 
@@ -43,6 +45,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 1rem; }
+	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important;  }
 //	#testModal div{ font-size: 30px; }
  }
 
@@ -53,6 +56,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 2rem; }
+	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important;  }
 //	#testModal div{ font-size: 35px; }
 }
 
@@ -63,6 +67,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 20px; }
 	a{ font-size: 2rem; }
 	input[type="submit"] { font-size: 30px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important;  }
 //	#testModal div{ font-size: 35px; }
  }
 
@@ -73,5 +78,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 20px; }
 	input[type="submit"] { font-size: 30px; }
 	a{ font-size: 2rem; }
+	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; }
 //	#testModal div{ font-size: 35px; }
  }

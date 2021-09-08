@@ -2,6 +2,7 @@ class TennisConreollerController < ApplicationController
   def new
       @schedules = Schedule.new
       @user_schedules = Schedule.joins(:user_schedules).select("schedules.*, user_schedules.*")
+      # @user_names = UserSchedule.joins(:users).select("user_schedules.*, users.*")
       @users = User.all
   end
 
@@ -31,11 +32,11 @@ class TennisConreollerController < ApplicationController
   #参加不参加変更
   def change
       # ログ
-      logger.debug(params)
+      logger.debug(user_schedule_params)
 
-      @user_schedules = UserSchedule.new(user_schedule_params)
+      @user_schedules = UserSchedule.find(params.require(:user_schedule)[:id])
       # スケジュール登録
-      if @user_schedules.save
+      if @user_schedules.update(user_schedule_params)
           redirect_to root_url
       else
           redirect_to root_url
@@ -48,7 +49,7 @@ class TennisConreollerController < ApplicationController
       end
 
       def user_schedule_params
-          params.require(:user_schedule).permit(:user_id, :schedule_id, :join_flg)
+          params.require(:user_schedule).permit(:id, :user_id, :schedule_id, :join_flg)
       end
 
 end
