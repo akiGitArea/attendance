@@ -66,7 +66,7 @@
 							      <td class="p-0">
 											<div class="flex">
 							    			<% @user_schedules.each do |user_schedules| %>
-						    					<% if schedules.id == user_schedules.schedule_id && user_schedules.join_flg == 1 then %>
+						    					<% if schedules.id == user_schedules.schedule_id && (user_schedules.join_flg == 1 || user_schedules.join_flg == true) then %>
 									    			<% @users.each do |users| %>
 								    					<% if user_schedules.user_id == users.id then %>
 																<div><%= users.name %></div>
@@ -102,13 +102,13 @@
 													<%= ff.hidden_field :schedule_id, value:user_schedules.schedule_id %>
 													<%= ff.hidden_field :user_id, value:@user_id %>
 													<%= ff.hidden_field :id, value:user_schedules.id %>
-													<% if user_schedules.join_flg == 1 %>
+													<% if user_schedules.join_flg == 1 ||  user_schedules.join_flg == true %>
 														<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="参加" readonly>
-														<%= ff.hidden_field :join_flg, value:0 %>
+														<%= ff.hidden_field :join_flg, value:false %>
 														<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
 													<% else %>
 														<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
-														<%= ff.hidden_field :join_flg, value:1 %>
+														<%= ff.hidden_field :join_flg, value:true %>
 														<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
 													<% end %>
 												<% end %>
