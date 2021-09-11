@@ -24,7 +24,7 @@
 					    <div class="col-lg-3 mt">
 					      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#testModal" data-backdrop="true">Schedule</button></p>
 					    </div>
-		    			<% if @admin_flg then %>
+		    			<% if @admin_flg == 1 ||  @admin_flg == true then %>
 						    <div class="col-lg-3 mt">
 						      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#adminScheduleModal" data-backdrop="true">Manage Schedule</button></p>
 						      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#createUserModal" data-backdrop="true">Create User</button></p>
@@ -44,78 +44,93 @@
         <div class="modal-content">
             <div class="modal-body whiteBack">
 		        	<table class="table table-hover">
-		    			<% if @admin_flg then %>
-							  <thead>
-							    <tr>
-							      <th class="p-0" scope="col">活動日時</th>
-							      <th class="p-0" scope="col">場所</th>
-							      <th class="p-0" scope="col">コート代</th>
-							      <th class="p-0" scope="col">参加費</th>
-							      <th class="p-0" scope="col">集合場所</th>
-							      <th class="p-0" scope="col">メンバー</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-			    			<% @schedules.each do |schedules| %>
-							    <tr>
-										<td class="p-0" scope="row"><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></td>
-							      <td class="p-0"><%= schedules.place %></td>
-							      <td class="p-0"><%= schedules.price_all %>円</td>
-							      <td class="p-0"><%= schedules.price_per %>円</td>
-							      <td class="p-0"><%= schedules.court_num %></td>
-							      <td class="p-0">
-											<div class="flex">
-							    			<% @user_schedules.each do |user_schedules| %>
-						    					<% if schedules.id == user_schedules.schedule_id && (user_schedules.join_flg == 1 || user_schedules.join_flg == true) then %>
-									    			<% @users.each do |users| %>
-								    					<% if user_schedules.user_id == users.id then %>
-																<div><%= users.name %></div>
+		    			<% if @admin_flg == 1 ||  @admin_flg == true then %>
+									  <thead>
+									    <tr>
+									      <th class="p-0" scope="col">活動日時</th>
+									      <th class="p-0" scope="col">場所</th>
+									      <th class="p-0" scope="col">コート代</th>
+									      <th class="p-0" scope="col">参加費</th>
+									      <th class="p-0" scope="col">集合場所</th>
+									      <th class="p-0" scope="col">メンバー</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+					    			<% @schedules.each do |schedules| %>
+									    <tr>
+												<td class="p-0" scope="row"><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></td>
+									      <td class="p-0"><%= schedules.place %></td>
+									      <td class="p-0"><%= schedules.price_all %>円</td>
+									      <td class="p-0"><%= schedules.price_per %>円</td>
+									      <td class="p-0"><%= schedules.court_num %></td>
+									      <td class="p-0">
+													<div class="flex">
+									    			<% @user_schedules.each do |user_schedules| %>
+								    					<% if schedules.id == user_schedules.schedule_id && (user_schedules.join_flg == 1 || user_schedules.join_flg == true) then %>
+											    			<% @users.each do |users| %>
+										    					<% if user_schedules.user_id == users.id then %>
+																		<div><%= users.name %></div>
+																	<% end %>
+																<% end %>
 															<% end %>
 														<% end %>
-													<% end %>
-												<% end %>
-											</div>
-										</td>
-							    </tr>
-								<% end %>
+													</div>
+												</td>
+									    </tr>
+										<% end %>
 							<% else %>
-							  <thead>
-							    <tr>
-							      <th class="p-0" scope="col">活動日時</th>
-							      <th class="p-0" scope="col">場所</th>
-							      <th class="p-0" scope="col">参加費</th>
-							      <th class="p-0" scope="col">集合場所</th>
-							      <th class="p-0" scope="col">参加/不参加</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-			    			<% @user_schedules.each do |user_schedules| %>
-		    					<% if user_schedules.user_id == @user_id then %>
-								    <tr>
-								      <td class="p-0" scope="row"><%= user_schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= user_schedules.end_at.strftime('%-H:%M') %></td>
-								      <td class="p-0"><%= user_schedules.place %></td>
-								      <td class="p-0"><%= user_schedules.price_per %>円</td>
-								      <td class="p-0"><%= user_schedules.court_num %></td>
-								      <td class="p-0">
-												<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
-												<%= form_for(@change_schedule, url: change_path) do |ff| %>
-													<%= ff.hidden_field :schedule_id, value:user_schedules.schedule_id %>
-													<%= ff.hidden_field :user_id, value:@user_id %>
-													<%= ff.hidden_field :id, value:user_schedules.id %>
-													<% if user_schedules.join_flg == 1 ||  user_schedules.join_flg == true %>
-														<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="参加" readonly>
-														<%= ff.hidden_field :join_flg, value:false %>
-														<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-													<% else %>
-														<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
-														<%= ff.hidden_field :join_flg, value:true %>
-														<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-													<% end %>
-												<% end %>
-											</td>
-								    </tr>
-									<% end %>
-								<% end %>
+									  <thead>
+									    <tr>
+									      <th class="p-0" scope="col">活動日時</th>
+									      <th class="p-0" scope="col">場所</th>
+									      <th class="p-0" scope="col">参加費</th>
+									      <th class="p-0" scope="col">集合場所</th>
+									      <th class="p-0" scope="col">参加/不参加</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+					    			<% @schedules.each do |schedules| %>
+										<% if schedules.start_at <= Date.today
+											next
+											end	%>
+										    <tr>
+										      <td class="p-0" scope="row"><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></td>
+										      <td class="p-0"><%= schedules.place %></td>
+										      <td class="p-0"><%= schedules.price_per %>円</td>
+										      <td class="p-0"><%= schedules.court_num %></td>
+										      <td class="p-0">
+																 <% @user_schedules_check = UserSchedule.find_by(schedule_id:schedules.id, user_id:@user_id) %>
+																 <% if @user_schedules_check.present? %>
+																			 		<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
+																			 		<%= form_for(@change_schedule, url: change_path) do |ff| %>
+																			 			<%= ff.hidden_field :schedule_id, value:schedules.id %>
+																			 			<%= ff.hidden_field :user_id, value:@user_id %>
+																			 			<%= ff.hidden_field :id, value:@user_schedules_check.id %>
+																			 				<% if @user_schedules_check	.join_flg == 1 ||  @user_schedules_check.join_flg == true then %>
+																			 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="参加" readonly>
+																			 					<%= ff.hidden_field :join_flg, value:false %>
+																			 					<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																			 				<% else %>
+																			 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
+																			 					<%= ff.hidden_field :join_flg, value:true %>
+																			 					<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																			 				<% end %>
+																			 			<% end %>
+																 <% else %>
+																						<!-- ユーザースケジュールにレコードがない場合 -->
+																						<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
+																						<%= form_for(@change_schedule, url: change_path) do |ffff| %>
+																							<%= ffff.hidden_field :schedule_id, value:schedules.id %>
+																							<%= ffff.hidden_field :user_id, value:@user_id %>
+																							<%= ffff.hidden_field :id, value:UserSchedule.count + 1  %>
+																							<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
+																							<%= ffff.hidden_field :join_flg, value:true %>
+																							<%= ffff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																						<% end %>
+															 	<% end %>
+													</td>
+										    </tr>
+										<% end %>
 							<% end %>
 						  </tbody>
 						</table>
