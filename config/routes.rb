@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   post 'create', to: "tennis_conreoller#create"
   post 'change', to: "tennis_conreoller#change"
 
+  post 'create_user', to: "tennis_conreoller#create_user"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

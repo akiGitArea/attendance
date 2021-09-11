@@ -4,10 +4,10 @@
 	</div>
 	<%= form_for(:session, url: login_path) do |f| %>
 		<div>
-			<%= f.label :email %>
+			<%= f.label :name %>
 		</div>
 		<div>
-			<%= f.email_field :email %>
+			<%= f.text_field :name %>
 		</div>
 		<div>
 			<%= f.label :password %>

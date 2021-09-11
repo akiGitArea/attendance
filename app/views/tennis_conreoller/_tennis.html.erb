@@ -25,11 +25,10 @@
 					      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#testModal" data-backdrop="true">Schedule</button></p>
 					    </div>
 		    			<% if @admin_flg then %>
-					    	<div class="d-flex justify-content-center">
-							    <div class="col-lg-3 mt">
-							      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#adminScheduleModal" data-backdrop="true">Manage Schedule</button></p>
-							    </div>
-				      	</div>
+						    <div class="col-lg-3 mt">
+						      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#adminScheduleModal" data-backdrop="true">Manage Schedule</button></p>
+						      <p><button type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#createUserModal" data-backdrop="true">Create User</button></p>
+						    </div>
 							<% end %>
 		      	</div>
 		      </div>
@@ -39,6 +38,7 @@
 	</div>
 </div>
 
+<!-- スケジュールモーダル -->
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -58,7 +58,7 @@
 							  <tbody>
 			    			<% @schedules.each do |schedules| %>
 							    <tr>
-							      <td class="p-0" scope="row"><div class="flex"><div><%= schedules.start_at.strftime('%-m月%d日%-H時%M分') %></div><div>～<%= schedules.end_at.strftime('%-H時%M分') %></div></div></td>
+										<td class="p-0" scope="row"><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></td>
 							      <td class="p-0"><%= schedules.place %></td>
 							      <td class="p-0"><%= schedules.price_all %>円</td>
 							      <td class="p-0"><%= schedules.price_per %>円</td>
@@ -92,7 +92,7 @@
 			    			<% @user_schedules.each do |user_schedules| %>
 		    					<% if user_schedules.user_id == @user_id then %>
 								    <tr>
-								      <td class="p-0" scope="row"><div class="flex"><div><%= user_schedules.start_at.strftime('%-m月%d日%-H時%M分') %></div><div>～<%= user_schedules.end_at.strftime('%-H時%M分') %></div></div></td>
+								      <td class="p-0" scope="row"><%= user_schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= user_schedules.end_at.strftime('%-H:%M') %></td>
 								      <td class="p-0"><%= user_schedules.place %></td>
 								      <td class="p-0"><%= user_schedules.price_per %>円</td>
 								      <td class="p-0"><%= user_schedules.court_num %></td>
@@ -124,6 +124,7 @@
     </div>
 </div>
 
+<!-- スケジュール作成モーダル -->
 <div class="modal fade" id="adminScheduleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -163,7 +164,47 @@
 									</div>
 									<div>
 								  	<%= f.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+									</div>
+								<% end %>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ユーザー作成モーダル -->
+<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body whiteBack">
+	            <div class="d-flex justify-content-center">
+								<div style="display:none;">
+									<%= @users = User.new %>
+								</div>
+								<%= form_for(@users, url: create_user_path) do |fff| %>
 									<div>
+									  <%= fff.label :name,"名前" %>
+								  	<%= fff.text_field  :name %>
+									</div>
+									<div>
+									  <%= fff.label :email,"メール" %>
+								  	<%= fff.email_field  :email %>
+									</div>
+									<div>
+									  <%= fff.label :password,"パスワード" %>
+								  	<%= fff.password_field :password %>
+									</div>
+									<div>
+									  <%= fff.label :del_flg, "削除フラグ" %>
+								  	<%= fff.select  :del_flg, [['未削除',0],['削除',1]], { include_blank: true, selected: 0 } %>
+									</div>
+									<div>
+									  <%= fff.label :admin_flg, "管理者フラグ" %>
+								  	<%= fff.select  :admin_flg, [['ユーザー',0],['管理者',1]], { include_blank: true, selected: 0 } %>
+									</div>
+									<div>
+								  	<%= fff.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+									</div>
 								<% end %>
 	            </div>
             </div>
