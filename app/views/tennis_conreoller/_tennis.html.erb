@@ -42,7 +42,7 @@
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-body whiteBack">
+            <div class="modal-body whiteBack2">
 		        	<table class="table table-hover">
 		    			<% if @admin_flg == 1 ||  @admin_flg == true then %>
 									  <thead>
@@ -143,7 +143,7 @@
 <div class="modal fade" id="adminScheduleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-body whiteBack">
+            <div class="modal-body whiteBack2">
 	            <div class="d-flex justify-content-center">
 								<div style="display:none;">
 									<%= @schedules = Schedule.new %>
@@ -191,7 +191,7 @@
 <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-body whiteBack">
+            <div class="modal-body whiteBack2">
 	            <div class="d-flex justify-content-center">
 								<div style="display:none;">
 									<%= @users = User.new %>
