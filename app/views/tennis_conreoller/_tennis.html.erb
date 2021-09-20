@@ -90,9 +90,18 @@
 									  </thead>
 									  <tbody>
 					    			<% @schedules.each do |schedules| %>
+										<% join_cnt = 0 %>
+										<!-- 過去のスケジュールは表示しない -->
 										<% if schedules.start_at <= Date.today
 											next
 											end	%>
+										<!-- 12人集まっているスケジュールは表示しない -->
+										<% @user_schedules_12 = UserSchedule.where(schedule_id:schedules.id) %>
+				    				<% @user_schedules_12.each do |user_schedules_12s| %>
+									 			<% if user_schedules_12s.join_flg == 1 || user_schedules_12s.join_flg == true %>
+														<% join_cnt += 1 %>
+												<% end %>
+										<% end %>
 										    <tr>
 										      <td class="p-0" scope="row"><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></td>
 										      <td class="p-0"><%= schedules.place %></td>
@@ -106,27 +115,35 @@
 																			 			<%= ff.hidden_field :schedule_id, value:schedules.id %>
 																			 			<%= ff.hidden_field :user_id, value:@user_id %>
 																			 			<%= ff.hidden_field :id, value:@user_schedules_check.id %>
-																			 				<% if @user_schedules_check	.join_flg == 1 ||  @user_schedules_check.join_flg == true then %>
-																			 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="参加" readonly>
-																			 					<%= ff.hidden_field :join_flg, value:false %>
-																			 					<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-																			 				<% else %>
-																			 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
-																			 					<%= ff.hidden_field :join_flg, value:true %>
-																			 					<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-																			 				<% end %>
+																				 				<% if @user_schedules_check	.join_flg == 1 ||  @user_schedules_check.join_flg == true then %>
+																					 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="参加" readonly>
+																					 					<%= ff.hidden_field :join_flg, value:false %>
+																					 					<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																				 				<% else %>
+																										<% if join_cnt >= 12%>
+																												満員
+																					 					<% else %>
+																							 					<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
+																							 					<%= ff.hidden_field :join_flg, value:true %>
+																							 					<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																				 						<% end %>
+																				 				<% end %>
 																			 			<% end %>
 																 <% else %>
-																						<!-- ユーザースケジュールにレコードがない場合 -->
-																						<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
-																						<%= form_for(@change_schedule, url: change_path) do |ffff| %>
-																							<%= ffff.hidden_field :schedule_id, value:schedules.id %>
-																							<%= ffff.hidden_field :user_id, value:@user_id %>
-																							<%= ffff.hidden_field :id, value:UserSchedule.count + 1  %>
-																							<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
-																							<%= ffff.hidden_field :join_flg, value:true %>
-																							<%= ffff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-																						<% end %>
+																		 <% if join_cnt >= 12%>
+																				 満員
+																		 <% else %>
+																					<!-- ユーザースケジュールにレコードがない場合 -->
+																					<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
+																					<%= form_for(@change_schedule, url: change_path) do |ffff| %>
+																						<%= ffff.hidden_field :schedule_id, value:schedules.id %>
+																						<%= ffff.hidden_field :user_id, value:@user_id %>
+																						<%= ffff.hidden_field :id, value:UserSchedule.count + 1  %>
+																						<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
+																						<%= ffff.hidden_field :join_flg, value:true %>
+																						<%= ffff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																					<% end %>
+																		<% end %>
 															 	<% end %>
 													</td>
 										    </tr>
