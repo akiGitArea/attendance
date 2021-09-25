@@ -1,0 +1,45 @@
+<div style="position:fixed;">
+	<%= link_to "back", home_top_path %>
+</div>
+<div>
+		<% @schedules = Schedule.all.order("schedules.start_at") %>
+		<% @schedules.each do |schedules| %>
+				<div style="display:none;">
+						<%= @exist_schedules = Schedule.new %>
+				</div>
+				<%= form_for(@exist_schedules, url: update_path) do |f| %>
+						<%= f.hidden_field :id, value:schedules.id %>
+						<div>
+							  <%= f.label :start_at,"日時(from)" %>
+						  	<%= f.datetime_select  :start_at , {default: schedules.start_at} %>
+						</div>
+						<div>
+							  <%= f.label :end_at,"日時(to)" %>
+						  	<%= f.datetime_select  :end_at , {default: schedules.end_at} %>
+						</div>
+						<div>
+							  <%= f.label :place,"場所" %>
+						  	<%= f.text_field :place , value:schedules.place %>
+						</div>
+						<div>
+							  <%= f.label :price_all, "コート料金" %>
+						  	<%= f.number_field  :price_all , value:schedules.price_all %>
+						</div>
+						<div>
+							  <%= f.label :price_per, "参加費" %>
+						  	<%= f.number_field  :price_per , value:schedules.price_per %>
+						</div>
+						<div>
+							  <%= f.label :court_num, "集合場所" %>
+						  	<%= f.text_field :court_num , value:schedules.court_num %>
+						</div>
+						<div>
+							  <%= f.label :explanation, "説明" %>
+						  	<%= f.text_field :explanation , value:schedules.explanation %>
+						</div>
+						<div>
+					  		<%= f.submit "Update", class: "btn btn-theme btn-lg mb-8" %>
+						</div>
+				<% end %>
+		<% end %>
+</div>

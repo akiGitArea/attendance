@@ -2,8 +2,6 @@ class TennisConreollerController < ApplicationController
   def new
       @schedules = Schedule.all.order("schedules.start_at")
       @user_schedules = Schedule.joins(:user_schedules).select("schedules.*, user_schedules.*").order("schedules.start_at")
-      # @user_schedules_per = Schedule.joins(:user_schedules).select("schedules.*, user_schedules.*").where(user_schedules: { user_id: 10 }).order("schedules.start_at")
-      # @user_names = UserSchedule.joins(:users).select("user_schedules.*, users.*")
       @users = User.all
       @schedules_add = Schedule.count + 1
   end
@@ -16,15 +14,6 @@ class TennisConreollerController < ApplicationController
       @schedules = Schedule.new(schedule_params)
       # スケジュール登録
       if @schedules.save
-          # ユーザ毎のスケジュール情報登録
-          # @users = User.all
-          # @users.each do |users|
-          #   @user_schedules = UserSchedule.new()
-          #   @user_schedules.user_id = users.id
-          #   @user_schedules.schedule_id = @schedules.id
-          #   @user_schedules.join_flg = false
-          #   @user_schedules.save
-          # end
           redirect_to root_url
       else
           redirect_to root_url
@@ -64,6 +53,10 @@ class TennisConreollerController < ApplicationController
       else
           redirect_to root_url
       end
+  end
+
+  #ユーザー更新
+  def update_user
   end
 
   private

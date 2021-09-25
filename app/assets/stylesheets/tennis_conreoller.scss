@@ -141,7 +141,7 @@ hr {
 #hello {
   width: 100%;
   padding-top: 250px;
-  padding-bottom: 250px;
+  // padding-bottom: 250px;
 }
 
 #hello h1 {
@@ -372,17 +372,15 @@ hr {
 .whiteBack {
   color: #74cfae;
   background-color: #fff;
-//  font-weight: 500;
   font-family: 'Hachi Maru Pop', cursive;
   text-align: center;
 }
 
 .whiteBack2 {
   color: #74cfae;
-  // background-color: #fff;
-//  font-weight: 500;
   font-family: 'Hachi Maru Pop', cursive;
   text-align: center;
+  font-weight: bold;
 }
 
 .unSlectedBtn {

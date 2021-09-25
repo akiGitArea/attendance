@@ -26,6 +26,10 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 .container{
   text-align: center;
 }
+.unSlectedBtn, .selectedBtn{
+  font-weight: bold;
+}
+
 //レスポンシブフォントサイズ
 @media screen and (max-width: 575px) {
  	h1{ font-size: 35px; }
@@ -33,9 +37,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 	label{ font-size: 15px; }
  	#adminScheduleModal label{ font-size: 10px; }
 	input[type="submit"] { font-size: 15px; }
-	.unSlectedBtn, .selectedBtn{ font-size: 10px !important; width:40px !important;  }
+	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:60px !important; padding: 2px;}
   .modal-body th, .modal-body td{ font-size: 10px; }
-//	#testModal div{ font-size: 25px; }
+ 	.modal-body{ font-size: 15px; }
  }
 
 @media screen and (min-width: 576px) and (max-width: 768px) {
@@ -45,8 +49,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 1rem; }
-	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important;  }
-//	#testModal div{ font-size: 30px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important; padding: 2px; }
+ 	.modal-body{ font-size: 20px; }
  }
 
 @media screen and (min-width: 769px) and (max-width: 992px) {
@@ -56,8 +60,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 2rem; }
-	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important;  }
-//	#testModal div{ font-size: 35px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important; padding: 2px; }
+ 	.modal-body{ font-size: 25px; }
 }
 
 @media screen and (min-width: 993px) and (max-width: 1200px) {
@@ -67,8 +71,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 20px; }
 	a{ font-size: 2rem; }
 	input[type="submit"] { font-size: 30px; }
-	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important;  }
-//	#testModal div{ font-size: 35px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; padding: 2px; }
+ 	.modal-body{ font-size: 25px; }
  }
 
 @media screen and (min-width: 1201px) {
@@ -78,6 +82,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	#adminScheduleModal label{ font-size: 20px; }
 	input[type="submit"] { font-size: 30px; }
 	a{ font-size: 2rem; }
-	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; }
-//	#testModal div{ font-size: 35px; }
+	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; padding: 3px; }
+ 	.modal-body{ font-size: 25px; }
  }
