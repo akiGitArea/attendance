@@ -29,13 +29,16 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 .unSlectedBtn, .selectedBtn{
   font-weight: bold;
 }
+a:hover{
+  color:#fff;
+}
 
 //レスポンシブフォントサイズ
 @media screen and (max-width: 575px) {
  	h1{ font-size: 35px; }
 	h2{ font-size: 15px; }
 	label{ font-size: 15px; }
- 	#adminScheduleModal label{ font-size: 10px; }
+ 	#adminScheduleModal label, #createUserModal label, .manage label{ font-size: 10px; }
 	input[type="submit"] { font-size: 15px; }
 	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:60px !important; padding: 2px;}
   .modal-body th, .modal-body td{ font-size: 10px; }
@@ -46,7 +49,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	h1{ font-size: 55px; }
  	h2{ font-size: 25px; }
  	label{ font-size: 25px; }
- 	#adminScheduleModal label{ font-size: 15px; }
+ 	#adminScheduleModal label, #createUserModal label, .manage label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 1rem; }
 	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important; padding: 2px; }
@@ -57,7 +60,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 	h1{ font-size: 55px; }
  	h2{ font-size: 25px; }
  	label{ font-size: 25px; }
- 	#adminScheduleModal label{ font-size: 15px; }
+ 	#adminScheduleModal label, #createUserModal label, .manage label{ font-size: 15px; }
 	input[type="submit"] { font-size: 25px; }
 	a{ font-size: 2rem; }
 	.unSlectedBtn, .selectedBtn{ font-size: 15px !important; width:79px !important; padding: 2px; }
@@ -68,7 +71,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
  	h1{ font-size: 70px; }
  	h2{ font-size: 30px; }
  	label{ font-size: 30px; }
- 	#adminScheduleModal label{ font-size: 20px; }
+ 	#adminScheduleModal label, #createUserModal label, .manage label{ font-size: 20px; }
 	a{ font-size: 2rem; }
 	input[type="submit"] { font-size: 30px; }
 	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; padding: 2px; }
@@ -79,7 +82,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 	h1{ font-size: 85px; }
  	h2{ font-size: 35px; }
  	label{ font-size: 35px; }
- 	#adminScheduleModal label{ font-size: 20px; }
+ 	#adminScheduleModal label, #createUserModal label, .manage label{ font-size: 20px; }
 	input[type="submit"] { font-size: 30px; }
 	a{ font-size: 2rem; }
 	.unSlectedBtn, .selectedBtn{ font-size: 20px !important; width:94px !important; padding: 3px; }

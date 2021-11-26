@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_120823) do
+ActiveRecord::Schema.define(version: 2021_11_13_065639) do
 
   create_table "schedules", force: :cascade do |t|
     t.integer "schedule_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_120823) do
     t.boolean "del_flg"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "max_join"
     t.index ["schedule_id"], name: "index_schedules_on_schedule_id"
   end
 
@@ -50,6 +51,8 @@ ActiveRecord::Schema.define(version: 2021_09_04_120823) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "del_flg"
     t.boolean "admin_flg"
+    t.boolean "priority_flg"
+    t.string "nickname"
   end
 
 end

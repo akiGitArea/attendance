@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       session[:admin_flg] = User.new()
       session[:admin_flg] = user.admin_flg
+      session[:priority_flg] = User.new()
+      session[:priority_flg] = user.priority_flg
 
       #home(controller)に戻る
       redirect_to root_url

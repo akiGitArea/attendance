@@ -1,5 +1,8 @@
 <%= javascript_pack_tag 'tennis' %>
 
+<!-- 曜日表示用 -->
+<% require 'date'%>
+
 <div style="overflow:hidden;">
 	<div class="navbar fixed-top">
 	  <div id="header" class="container">
@@ -18,32 +21,37 @@
 				  <div class="container">
 			        <h1 class="pb-3">MUSAKO Tennis</h1>
 			        <h2>Musashikosugi Tennis Circle</h2>
-			      	<div class="pt-5"><input type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#testModal" data-backdrop="true" value="Schedule"></div>
+			      	<div class="pt-5 mb-3"><input type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#testModal" data-backdrop="true" value="Schedule"></div>
 		    			<% if @admin_flg == 1 ||  @admin_flg == true then %>
 					      	<div class="pt-3"><input type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#adminScheduleModal" data-backdrop="true" value="Create Schedule"></div>
 					      	<div class="pt-3"><input type="button" class="btn btn-theme btn-lg mb-8	" data-toggle="modal" data-target="#createUserModal" data-backdrop="true" value="Create User"></div>
-									<div class="pt-5"><%= link_to "Manage Schedule", manage_schedules_manage_schedule_path %></div>
-									<div><%= link_to "Manage User", manage_users_manage_user_path %></div>
+									<div class="pt-3"><%= link_to "Manage Schedule", manage_schedules_manage_schedule_path, class: 'btn btn-default btn btn-theme btn-lg' %></div>
+									<div class="py-3 mb-3"><%= link_to "Manage User", manage_users_manage_user_path, class: 'btn btn-default btn btn-theme btn-lg' %></div>
 							<% end %>
 				  </div>
 			</div>
 	</div>
 </div>
-
 <!-- スケジュールモーダル -->
 <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-body whiteBack2">
+								<div style="text-align:right;" class="mb-2"><button type="button" class="btn btn-default" data-dismiss="modal" style="color:#74cfae; background-color:#9ddbc566; font-size:14px;"><i class="fas fa-times"></i></button></div>
 			    			<% if @admin_flg == 1 ||  @admin_flg == true then %>
 											<!--管理者用スケジュールモーダル -->
 						    			<% @schedules.each do |schedules| %>
+													<!-- 過去のスケジュールは表示しない -->
+													<% if schedules.start_at <= Date.today
+													next
+													end	%>
 													<div class="mb-3 p-2 rounded" style="border: dashed;">
-															<div><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></div>
+															<div><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') + %w(（日） （月） （火） （水） （木） （金） （土）)[schedules.start_at.wday] %></div>
 															<div><%= schedules.place %></div>
-															<div><%= schedules.price_all %>円</div>
-															<div><%= schedules.price_per %>円</div>
+															<div>コート料金：<%= schedules.price_all %>円</div>
+															<div>参加費：<%= schedules.price_per %>円</div>
 															<div><%= schedules.court_num %></div>
+															<div>定員：<%= schedules.max_join %>人</div>
 															<div>
 												    			<% @user_schedules.each do |user_schedules| %>
 												    					<% if schedules.id == user_schedules.schedule_id && (user_schedules.join_flg == 1 || user_schedules.join_flg == true) then %>
@@ -65,6 +73,10 @@
 													<% if schedules.start_at <= Date.today
 													next
 													end	%>
+													<!-- 優先者以外は13日まで来月のスケジュールを表示しない -->
+													<% if schedules.start_at.mon != Date.today.mon && Date.today.mday <= 15 && (@priority_flg == 0 || @priority_flg == false || @priority_flg == nil)
+													next
+													end	%>
 													<!-- スケジュールの参加人数をカウント -->
 													<% @user_schedules_12 = UserSchedule.where(schedule_id:schedules.id) %>
 							    				<% @user_schedules_12.each do |user_schedules_12s| %>
@@ -73,10 +85,11 @@
 															<% end %>
 													<% end %>
 													<div class="mb-3 p-2 rounded" style="border: dashed;">
-															<div><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') %></div>
+															<div><%= schedules.start_at.strftime('%-m/%-d %-H:%M') %>～<%= schedules.end_at.strftime('%-H:%M') + %w(（日） （月） （火） （水） （木） （金） （土）)[schedules.start_at.wday] %></div>
 															<div><%= schedules.place %></div>
-															<div><%= schedules.price_per %>円</div>
+															<div>参加費：<%= schedules.price_per %>円</div>
 															<div><%= schedules.court_num %></div>
+															<div>参加人数/定員：<%= join_cnt %>人/<%= schedules.max_join %>人</div>
 															<div>
 																		 <% @user_schedules_check = UserSchedule.find_by(schedule_id:schedules.id, user_id:@user_id) %>
 																		 <% if @user_schedules_check.present? %>
@@ -90,31 +103,35 @@
 																												<%= ff.hidden_field :join_flg, value:false %>
 																												<%= ff.submit "不参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn" %>
 																										<% else %>
-																												<% if join_cnt >= 12%>
-																												<!-- 12人集まっているスケジュールは表示しない -->
-																														満員御礼
-																												<% else %>
-																														<%= ff.hidden_field :join_flg, value:true %>
-																														<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn" %>
-																														<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn" value="不参加" readonly>
+																												<% if schedules.max_join.present? %>
+																														<% if join_cnt >= schedules.max_join %>
+																														<!-- 12人集まっているスケジュールは表示しない -->
+																																満員御礼
+																														<% else %>
+																																<%= ff.hidden_field :join_flg, value:true %>
+																																<%= ff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn" %>
+																																<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn" value="不参加" readonly>
+																														<% end %>
 																												<% end %>
 																										<% end %>
 																								<% end %>
 																		 <% else %>
-																				 <% if join_cnt >= 12%>
-																				 <!-- 12人集まっているスケジュールは表示しない -->
-																						 満員御礼
-																				 <% else %>
-																							<!-- ユーザースケジュールにレコードがない場合 -->
-																							<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
-																							<%= form_for(@change_schedule, url: change_path) do |ffff| %>
-																										<%= ffff.hidden_field :schedule_id, value:schedules.id %>
-																										<%= ffff.hidden_field :user_id, value:@user_id %>
-																										<%= ffff.hidden_field :id, value:UserSchedule.count + 1  %>
-																										<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
-																										<%= ffff.hidden_field :join_flg, value:true %>
-																										<%= ffff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
-																							<% end %>
+																				 <% if schedules.max_join.present? %>
+																						 <% if join_cnt >= schedules.max_join %>
+																						 <!-- 12人集まっているスケジュールは表示しない -->
+																								 満員御礼
+																						 <% else %>
+																									<!-- ユーザースケジュールにレコードがない場合 -->
+																									<div style="display:none;"><%= @change_schedule = UserSchedule.new %></div>
+																									<%= form_for(@change_schedule, url: change_path) do |ffff| %>
+																												<%= ffff.hidden_field :schedule_id, value:schedules.id %>
+																												<%= ffff.hidden_field :user_id, value:@user_id %>
+																												<%= ffff.hidden_field :id, value:UserSchedule.count + 1  %>
+																												<input type="button" class="btn btn-theme btn-lg mb-8 selectedBtn p-0" value="不参加" readonly>
+																												<%= ffff.hidden_field :join_flg, value:true %>
+																												<%= ffff.submit "参加", class: "btn btn-theme btn-lg mb-8 unSlectedBtn p-0" %>
+																									<% end %>
+																						<% end %>
 																				<% end %>
 																		<% end %>
 																</div>
@@ -147,26 +164,30 @@
 														</div>
 														<div>
 															  <%= f.label :place,"場所" %>
-														  	<%= f.text_field :place %>
+														  	<%= f.text_field :place ,class: "form-control" %>
 														</div>
 														<div>
 															  <%= f.label :price_all, "コート料金" %>
-														  	<%= f.number_field  :price_all %>
+														  	<%= f.number_field  :price_all ,class: "form-control" %>
 														</div>
 														<div>
 															  <%= f.label :price_per, "参加費" %>
-														  	<%= f.number_field  :price_per %>
+														  	<%= f.number_field  :price_per ,class: "form-control" %>
 														</div>
 														<div>
 															  <%= f.label :court_num, "集合場所" %>
-														  	<%= f.text_field :court_num %>
+														  	<%= f.text_field :court_num ,class: "form-control" %>
+														</div>
+														<div>
+															  <%= f.label :max_join, "定員" %>
+														  	<%= f.number_field :max_join ,class: "form-control" %>
 														</div>
 														<div>
 															  <%= f.label :explanation, "説明" %>
-														  	<%= f.text_field :explanation %>
+														  	<%= f.text_field :explanation ,class: "form-control" %>
 														</div>
 														<div>
-													  		<%= f.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+													  		<%= f.submit "Submit", class: "btn btn-theme btn-lg mt-3" %>
 														</div>
 												<% end %>
 				            </div>
@@ -187,15 +208,19 @@
 												<%= form_for(@users, url: create_user_path) do |fff| %>
 														<div>
 														  <%= fff.label :name,"名前" %>
-													  	<%= fff.text_field  :name %>
+													  	<%= fff.text_field  :name,class: "form-control" %>
 														</div>
+														<!-- <div>
+														  <%= fff.label :nickname,"ニックネーム" %>
+													  	<%= fff.text_field  :nickname,class: "form-control" %>
+														</div> -->
 														<div>
 														  <%= fff.label :email,"メール" %>
-													  	<%= fff.email_field  :email %>
+													  	<%= fff.email_field  :email,class: "form-control" %>
 														</div>
 														<div>
 														  <%= fff.label :password,"パスワード" %>
-													  	<%= fff.password_field :password %>
+													  	<%= fff.password_field :password,class: "form-control" %>
 														</div>
 														<div>
 														  <%= fff.label :del_flg, "削除フラグ" %>
@@ -206,7 +231,11 @@
 													  	<%= fff.select  :admin_flg, [['ユーザー',0],['管理者',1]], { include_blank: true, selected: 0 } %>
 														</div>
 														<div>
-													  	<%= fff.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+														  <%= fff.label :priority_flg, "優先フラグ" %>
+													  	<%= fff.select  :priority_flg, [['一般',0],['優先',1]], { include_blank: true, selected: 0 } %>
+														</div>
+														<div>
+													  	<%= fff.submit "Submit", class: "btn btn-theme btn-lg mt-3" %>
 														</div>
 												<% end %>
 				            </div>

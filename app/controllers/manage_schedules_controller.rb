@@ -18,7 +18,7 @@ class ManageSchedulesController < ApplicationController
 
   private
   def exist_schedule_params
-      params.require(:schedule).permit(:start_at, :end_at, :place, :price_all, :price_per, :court_num, :explanation)
+      params.require(:schedule).permit(:start_at, :end_at, :place, :price_all, :price_per, :court_num, :max_join, :explanation)
   end
 
 end

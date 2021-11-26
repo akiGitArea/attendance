@@ -1,37 +1,53 @@
-<div style="position:fixed;">
-	<%= link_to "back", home_top_path %>
-</div>
-<div>
-		<% @users = User.all %>
-		<% @users.each do |users| %>
-				<div style="display:none;">
-					<%= @exist_users = User.new %>
-				</div>
-				<%= form_for(@exist_users, url: update_user_path) do |fff| %>
-						<%= fff.hidden_field :id, value:users.id %>
-						<div>
-						  <%= fff.label :name,"名前" %>
-					  	<%= fff.text_field  :name , value:users.name %>
-						</div>
-						<div>
-						  <%= fff.label :email,"メール" %>
-					  	<%= fff.email_field  :email , value:users.email %>
-						</div>
-						<div>
-						  <%= fff.label :password,"パスワード" %>
-					  	<%= fff.password_field :password , value:users.password %>
-						</div>
-						<div>
-						  <%= fff.label :del_flg, "削除フラグ" %>
-					  	<%= fff.select  :del_flg, [['未削除',0],['削除',1]], { include_blank: true, selected: if users.del_flg == 1 || users.del_flg == true then 1 else 0 end } %>
-						</div>
-						<div>
-						  <%= fff.label :admin_flg, "管理者フラグ" %>
-					  	<%= fff.select  :admin_flg, [['ユーザー',0],['管理者',1]], { include_blank: true, selected: if users.admin_flg == 1 || users.admin_flg == true then 1 else 0 end } %>
-						</div>
-						<div>
-					  	<%= fff.submit "Submit", class: "btn btn-theme btn-lg mb-8" %>
+<div class="whiteBack2 manage">
+		<div style="position:fixed;" class="mt-4 ml-4">
+			<%= link_to "back", home_top_path , class: 'btn btn-default btn btn-theme btn-lg'%>
+		</div>
+		<div>
+				<% @users = User.all %>
+				<% @users.each do |users| %>
+						<div class="m-3 p-2 rounded" style="border: dashed;">
+								<div style="display:none;">
+									<%= @exist_users = User.new %>
+								</div>
+								<%= form_for(@exist_users, url: update_user_path) do |fff| %>
+										<%= fff.hidden_field :id, value:users.id %>
+										<div>
+										  <%= fff.label :name,"名前" %>
+									  	<%= fff.text_field  :name , value:users.name,class: "form-control" %>
+										</div>
+										<!-- <div>
+										  <%= fff.label :nickname,"ニックネーム" %>
+									  	<%= fff.text_field  :nickname , value:users.nickname,class: "form-control" %>
+										</div> -->
+										<div>
+										  <%= fff.label :email,"メール" %>
+									  	<%= fff.email_field  :email , value:users.email,class: "form-control" %>
+										</div>
+										<div>
+										  <%= fff.label :password,"パスワード" %>
+									  	<%= fff.password_field :password , value:users.password,class: "form-control" %>
+										</div>
+										<div>
+										  <%= fff.label :del_flg, "削除フラグ" %>
+									  	<%= fff.select  :del_flg, [['未削除',0],['削除',1]], { include_blank: true, selected: if users.del_flg == 1 || users.del_flg == true then 1 else 0 end } %>
+										</div>
+										<div>
+										  <%= fff.label :admin_flg, "管理者フラグ" %>
+									  	<%= fff.select  :admin_flg, [['ユーザー',0],['管理者',1]], { include_blank: true, selected: if users.admin_flg == 1 || users.admin_flg == true then 1 else 0 end } %>
+										</div>
+										<div>
+										  <%= fff.label :priority_flg, "優先フラグ" %>
+									  	<%= fff.select  :priority_flg, [['一般',0],['優先',1]], { include_blank: true, selected: if users.priority_flg == 1 || users.priority_flg == true then 1 else 0 end } %>
+										</div>
+										<div>
+									  	<%= fff.submit "Submit", class: "btn btn-theme btn-lg mb-8 mt-3" %>
+										</div>
+								<% end %>
 						</div>
 				<% end %>
-		<% end %>
+		</div>
 </div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">

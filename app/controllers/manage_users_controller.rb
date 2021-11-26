@@ -15,7 +15,7 @@ class ManageUsersController < ApplicationController
 
   private
   def exist_user_params
-      params.require(:user).permit(:name, :email, :password, :del_flg, :admin_flg)
+      params.require(:user).permit(:name, :email, :password, :del_flg, :admin_flg, :priority_flg)
   end
 
 end

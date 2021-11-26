@@ -61,7 +61,7 @@ class TennisConreollerController < ApplicationController
 
   private
       def schedule_params
-          params.require(:schedule).permit(:start_at, :end_at, :place, :price_all, :price_per, :court_num, :explanation)
+          params.require(:schedule).permit(:start_at, :end_at, :place, :price_all, :price_per, :court_num, :max_join, :explanation)
       end
 
       def user_schedule_params
@@ -73,7 +73,7 @@ class TennisConreollerController < ApplicationController
       end
 
       def user_params
-          params.require(:user).permit(:name, :email, :password, :del_flg, :admin_flg)
+          params.require(:user).permit(:name, :email, :password, :del_flg, :admin_flg, :priority_flg)
       end
 
 end
