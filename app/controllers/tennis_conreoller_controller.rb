@@ -8,9 +8,6 @@ class TennisConreollerController < ApplicationController
 
   #スケジュール登録
   def create
-      # ログ
-      logger.debug(params)
-
       @schedules = Schedule.new(schedule_params)
       # スケジュール登録
       if @schedules.save
@@ -22,9 +19,6 @@ class TennisConreollerController < ApplicationController
 
   #参加不参加変更
   def change
-      # ログ
-      logger.debug(user_schedule_params)
-
       @user_schedules = UserSchedule.find_by(id:params.require(:user_schedule)[:id])
       if @user_schedules == nil
             # 個人スケジュール登録
@@ -47,16 +41,12 @@ class TennisConreollerController < ApplicationController
   #ユーザー作成
   def create_user
       @users = User.new(user_params)
-      # スケジュール登録
+      # ユーザー登録
       if @users.save
           redirect_to root_url
       else
           redirect_to root_url
       end
-  end
-
-  #ユーザー更新
-  def update_user
   end
 
   private

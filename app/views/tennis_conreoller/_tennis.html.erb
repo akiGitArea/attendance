@@ -105,7 +105,7 @@
 																										<% else %>
 																												<% if schedules.max_join.present? %>
 																														<% if join_cnt >= schedules.max_join %>
-																														<!-- 12人集まっているスケジュールは表示しない -->
+																														<!-- 定員に達しているスケジュールは表示しない -->
 																																満員御礼
 																														<% else %>
 																																<%= ff.hidden_field :join_flg, value:true %>
@@ -118,7 +118,7 @@
 																		 <% else %>
 																				 <% if schedules.max_join.present? %>
 																						 <% if join_cnt >= schedules.max_join %>
-																						 <!-- 12人集まっているスケジュールは表示しない -->
+																						 <!-- 定員に達しているスケジュールは表示しない -->
 																								 満員御礼
 																						 <% else %>
 																									<!-- ユーザースケジュールにレコードがない場合 -->
