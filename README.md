@@ -117,3 +117,5 @@ rails c
 ```
 テーブル確認 【テーブル名】.column_names
 ```
+
+test
